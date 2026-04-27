@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "https://fullstackproject-nu.vercel.app")
 @RestController
 @RequestMapping("/api/financial-aid")
 public class FinancialAidController {

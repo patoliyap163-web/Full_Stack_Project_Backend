@@ -7,7 +7,7 @@ import com.example.scholarship_backend.dto.ApiResponse;
 
 @RestController
 @RequestMapping("/student-profile")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "https://fullstackproject-nu.vercel.app")
 public class StudentProfileController {
 
     private final StudentProfileService service;

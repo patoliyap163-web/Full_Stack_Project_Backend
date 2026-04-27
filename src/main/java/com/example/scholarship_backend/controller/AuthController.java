@@ -11,7 +11,7 @@ import com.example.scholarship_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://fullstackproject-nu.vercel.app")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

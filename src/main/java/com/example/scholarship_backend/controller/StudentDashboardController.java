@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://fullstackproject-nu.vercel.app")
 @RestController
 @RequestMapping("/api/dashboard")
 public class StudentDashboardController {
