@@ -67,11 +67,15 @@ public class JwtUtil {
     // Check if Token is Expired
     public boolean isTokenExpired(String token) {
         try {
-            Date expiration = extractAllClaims(token).getExpiration();
+            Date expiration = extractExpiration(token);
             return expiration.before(new Date());
         } catch (JwtException | IllegalArgumentException e) {
             return true;
         }
+    }
+
+    public Date extractExpiration(String token) {
+        return extractAllClaims(token).getExpiration();
     }
 
     // Extract All Claims

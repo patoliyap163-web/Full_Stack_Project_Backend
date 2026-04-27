@@ -5,6 +5,7 @@ import com.example.scholarship_backend.dto.AuthResponse;
 import com.example.scholarship_backend.dto.UserResponse;
 import com.example.scholarship_backend.model.User;
 import com.example.scholarship_backend.repository.UserRepository;
+import com.example.scholarship_backend.security.RevokedTokenService;
 import com.example.scholarship_backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +24,9 @@ public class UserService {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private RevokedTokenService revokedTokenService;
 
     public User getEntityById(Long id) {
         return userRepository.findById(id)
@@ -73,6 +77,21 @@ public class UserService {
                 "Login successful",
                 token,
                 new UserResponse(user));
+    }
+
+    public ApiResponse<Void> logout(String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return new ApiResponse<>(false, "Authorization header with Bearer token is required for logout.");
+        }
+
+        String token = authHeader.substring(7);
+
+        if (!jwtUtil.validateToken(token) || jwtUtil.isTokenExpired(token)) {
+            return new ApiResponse<>(false, "Token is invalid or already expired.");
+        }
+
+        revokedTokenService.revokeToken(token, jwtUtil.extractExpiration(token));
+        return new ApiResponse<>(true, "Logout successful. Token revoked. Remove the JWT from local storage on the client side.");
     }
 
     // GET USER BY ID

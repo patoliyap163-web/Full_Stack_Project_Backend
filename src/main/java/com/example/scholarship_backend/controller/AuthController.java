@@ -26,4 +26,9 @@ public class AuthController {
     public AuthResponse login(@RequestBody LoginRequest loginRequest) {
         return userService.login(loginRequest.getEmail(), loginRequest.getPassword());
     }
+
+    @PostMapping("/logout")
+    public ApiResponse<Void> logout(@RequestHeader(value = "Authorization", required = false) String authHeader) {
+        return userService.logout(authHeader);
+    }
 }
