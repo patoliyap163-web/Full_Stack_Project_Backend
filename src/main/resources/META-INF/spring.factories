@@ -1,0 +1,2 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.example.scholarship_backend.config.DotenvEnvironmentPostProcessor
