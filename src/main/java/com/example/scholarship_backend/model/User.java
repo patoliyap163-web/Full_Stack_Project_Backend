@@ -19,9 +19,11 @@ public class User {
 
     private String role;
 
-    // Constructors
-    public User() {}
+    // No-args constructor
+    public User() {
+    }
 
+    // All-args constructor
     public User(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
@@ -30,21 +32,43 @@ public class User {
     }
 
     // Getters & Setters
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public String getName() {
+        return name;
+    }
 
-    public String getEmail() { return email; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setEmail(String email) { this.email = email; }
+    public String getEmail() {
+        return email;
+    }
 
-    public String getPassword() { return password; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public void setPassword(String password) { this.password = password; }
+    public String getPassword() {
+        return password;
+    }
 
-    public String getRole() { return role; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public void setRole(String role) { this.role = role; }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
