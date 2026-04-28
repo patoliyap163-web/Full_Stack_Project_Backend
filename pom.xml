@@ -104,6 +104,7 @@
     </dependencies>
 
     <build>
+        <finalName>scholarship-backend</finalName>
         <plugins>
 
             <!-- Compiler (FIXED) -->
