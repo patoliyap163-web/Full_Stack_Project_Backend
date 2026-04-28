@@ -46,7 +46,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (revokedTokenService.isTokenRevoked(token)) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.setContentType("application/json");
-                response.getWriter().write("{\"success\":false,\"message\":\"Token has been revoked. Please log in again.\"}");
+                response.getWriter()
+                        .write("{\"success\":false,\"message\":\"Token has been revoked. Please log in again.\"}");
                 return;
             }
 
