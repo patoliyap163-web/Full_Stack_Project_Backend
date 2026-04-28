@@ -20,47 +20,47 @@ public class FinancialAidController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse> create(@RequestBody FinancialAid aid) {
+    public ResponseEntity<ApiResponse<FinancialAid>> create(@RequestBody FinancialAid aid) {
         FinancialAid created = service.create(aid);
-        return ResponseEntity.ok(new ApiResponse(true, "Financial Aid created", created));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Financial Aid created", created));
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse> getAll() {
+    public ResponseEntity<ApiResponse<List<FinancialAid>>> getAll() {
         List<FinancialAid> aids = service.getAll();
-        return ResponseEntity.ok(new ApiResponse(true, "All financial aid fetched", aids));
+        return ResponseEntity.ok(new ApiResponse<>(true, "All financial aid fetched", aids));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<FinancialAid>> getById(@PathVariable Long id) {
         return service.findById(id)
-                .map(aid -> ResponseEntity.ok(new ApiResponse(true, "Financial Aid found", aid)))
-                .orElseGet(() -> ResponseEntity.badRequest().body(new ApiResponse(false, "Financial Aid not found")));
+                .map(aid -> ResponseEntity.ok(new ApiResponse<>(true, "Financial Aid found", aid)))
+                .orElseGet(() -> ResponseEntity.badRequest().body(new ApiResponse<>(false, "Financial Aid not found")));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> update(@PathVariable Long id, @RequestBody FinancialAid updated) {
+    public ResponseEntity<ApiResponse<FinancialAid>> update(@PathVariable Long id, @RequestBody FinancialAid updated) {
         if (!service.existsById(id)) {
-            return ResponseEntity.badRequest().body(new ApiResponse(false, "Financial Aid not found"));
+            return ResponseEntity.badRequest().body(new ApiResponse<>(false, "Financial Aid not found"));
         }
         FinancialAid aid = service.update(id, updated);
-        return ResponseEntity.ok(new ApiResponse(true, "Financial Aid updated", aid));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Financial Aid updated", aid));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> delete(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
         if (!service.existsById(id)) {
-            return ResponseEntity.badRequest().body(new ApiResponse(false, "Financial Aid not found"));
+            return ResponseEntity.badRequest().body(new ApiResponse<>(false, "Financial Aid not found"));
         }
         try {
             service.delete(id);
-            return ResponseEntity.ok(new ApiResponse(true, "Financial Aid deleted"));
+            return ResponseEntity.ok(new ApiResponse<>(true, "Financial Aid deleted"));
         } catch (RuntimeException e) {
             String message = e.getMessage();
             if (message.contains("Cannot delete this financial aid")) {
                 message = "This financial aid cannot be deleted because it has already been approved for one or more students. Deleting approved financial aid would compromise data integrity and student records.";
             }
-            return ResponseEntity.badRequest().body(new ApiResponse(false, message));
+            return ResponseEntity.badRequest().body(new ApiResponse<>(false, message));
         }
     }
 

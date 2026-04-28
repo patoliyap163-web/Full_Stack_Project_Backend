@@ -1,6 +1,5 @@
 package com.example.scholarship_backend.repository;
 
-import com.example.scholarship_backend.model.Application;
 import com.example.scholarship_backend.model.FinancialAid;
 import org.springframework.data.jpa.repository.JpaRepository;
 

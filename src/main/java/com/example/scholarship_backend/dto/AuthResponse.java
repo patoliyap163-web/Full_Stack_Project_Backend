@@ -1,7 +1,5 @@
 package com.example.scholarship_backend.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class AuthResponse {
 
     private boolean success;
